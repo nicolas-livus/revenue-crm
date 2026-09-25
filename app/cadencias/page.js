@@ -65,6 +65,10 @@ function Operacional({ all, codes, sp }) {
     .flatMap(p => p.t.map((t, i) => ({ p, t, n: i + 1 })))
     .filter(({ t, n }) => t.channel === "WHATSAPP" && t.content && (touch === "Todos" || `T${n}` === touch))
     .sort((a, b) => a.n - b.n || (a.p.company || "").localeCompare(b.p.company || ""));
+  // lista de contatos coerente com os filtros: um por contato, na ordem dos cards
+  const seen = new Set();
+  const contactList = cards.filter(({ p }) => !seen.has(p.id) && seen.add(p.id))
+    .map(({ p }) => `[${p.company || ""}] [${p.name || ""}][${(p.phone || "").replace(/\D/g, "")}]`).join("\n");
   const sel = (name, val, opts) => <select name={name} defaultValue={val}>{opts.map(o => <option key={o}>{o}</option>)}</select>;
   return (<section>
     <h2 className="section">Envios de WhatsApp</h2>
@@ -74,6 +78,7 @@ function Operacional({ all, codes, sp }) {
       <label>Variação{sel("variacao", variacao, ["Todos", ...variations])}</label>
       <span className="mut mono">{cards.length} {cards.length === 1 ? "mensagem" : "mensagens"}</span>
     </AutoSubmit>
+    {cards.length > 0 && <div className="op-copyall"><CopyButton text={contactList} className="link" label={`Copiar lista de contatos (${seen.size})`} /></div>}
     <div className="op-cards">
       {cards.map(({ p, t, n }) => (
         <div className="op-card" key={`${p.id}-${n}`}>

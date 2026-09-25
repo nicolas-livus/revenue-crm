@@ -102,3 +102,6 @@ h2.section::after{content:"";flex:1;height:1px;background:var(--line)}
 .op-who b{font-size:17px;font-weight:500}
 .op-touch{color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:10px}
 .op-actions{display:flex;gap:8px;align-items:center}
+.op-copyall{margin:-8px 0 12px}
+button.link{background:none;border:0;padding:4px 0;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+button.link:hover{background:none;color:var(--ink)}
