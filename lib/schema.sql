@@ -1,34 +1,35 @@
-create table if not exists accounts (
+create table if not exists prospects (
   id serial primary key,
-  name text not null,
-  domain text unique,
-  round text,              -- rodada de prospecção (ex: R12)
-  thesis text,             -- tese (ex: T03)
-  radar_notes text,        -- sinais do radar
-  status text not null default 'ativa', -- ativa | descartada
-  created_at timestamptz not null default now()
-);
-create table if not exists contacts (
-  id serial primary key,
-  account_id int references accounts(id) on delete cascade,
-  name text not null,
-  title text,
+  code text unique not null,          -- ID (ex: ECOM-10M-A-001)
+  strategy text,                      -- Estratégia
+  name text,
+  company text,
+  linkedin text,
   email text,
   phone text,
-  linkedin text,
-  stage text not null default 'novo', -- novo | t1_enviado | cadencia | respondeu | conexao | reuniao | ganho | perdido
+  has_whatsapp text,                  -- Sim | Não
+  stage text not null default 'Prospect',        -- Estágio
+  pipeline text not null default 'fora de pipe', -- Pipeline
+  created_on date default current_date,          -- Data de Criação
+  meeting_scheduled boolean not null default false, -- Reunião Agendada
+  no_show boolean not null default false,
+  owner text default 'Nícolas',       -- Responsável
+  hook text,                          -- Gancho de Recuperação
   notes text,
-  created_at timestamptz not null default now(),
+  proposal_value numeric,
+  proposal_date date,
   updated_at timestamptz not null default now()
 );
-create table if not exists touches (
-  id serial primary key,
-  contact_id int references contacts(id) on delete cascade,
-  touch_no int,            -- 1..6
-  channel text,            -- whatsapp | email | linkedin | ligacao
-  message text,
-  reply text,
-  sent_at timestamptz default now()
+create table if not exists prospect_touches (
+  prospect_id int not null references prospects(id) on delete cascade,
+  touch_no int not null check (touch_no between 1 and 6),
+  channel text,   -- EMAIL | WHATSAPP | LINKEDIN | INSTAGRAM | LIGAÇÃO
+  status text,    -- Enviado | Recebido | Respondido
+  content text,
+  primary key (prospect_id, touch_no)
 );
-create index if not exists contacts_account_idx on contacts(account_id);
-create index if not exists touches_contact_idx on touches(contact_id);
+create table if not exists strategies (
+  code text primary key,
+  csv_link text,   -- Link do CSV da cadência
+  notes text       -- Observações
+);
