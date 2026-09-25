@@ -5,7 +5,7 @@ Stack: Next.js (App Router, server actions) · Neon Postgres (driver HTTP `@neon
 
 - Segredos ficam em `.env` (nunca commitar). Modelo em `.env.example`.
 - Acesso protegido por senha única (`CRM_PASSWORD`), cookie via `middleware.js`.
-- Espelha a planilha crm_livus_v2.xlsx: Revenue BI (`/`, página inicial), Database (`/database`, oculta do menu), Ficha do Prospect (`/prospects/[id]`), Cadências (`/cadencias`: estratégias ocultáveis com resumo em strategies.summary, contatos abordados e mensagens da cadência), Banco de Recuperação (`/recuperacao`), Importar/Exportar xlsx (`/importar`, `/api/export`).
+- Espelha a planilha crm_livus_v2.xlsx: Revenue BI (`/`, página inicial), Database (`/database`, oculta do menu), Ficha do Prospect (`/prospects/[id]`), Cadências (`/cadencias`: topo operacional com cards de WhatsApp p/ copiar e marcar WhatsApp inválido, filtros estratégia/touch/variação = letra do ID; depois estratégias ocultáveis com resumo em strategies.summary, contatos abordados e mensagens da cadência), Banco de Recuperação (`/recuperacao`), Importar/Exportar xlsx (`/importar`, `/api/export`).
 - Schema: `lib/schema.sql` → `npm run db:migrate`. Tabelas: prospects (1 linha = 1 linha da aba Outbound Database, casada pelo ID tipo ECOM-10M-A-001), prospect_touches (T1–T6: canal, status, conteúdo), strategies (link do CSV da cadência, observações).
 - Métricas do BI em `lib/metrics.js` (mesmas fórmulas da aba Revenue BI; base exclui Estágio = Redirecionado). Listas de Estágio/Pipeline/Canal em `lib/db.js`.
 - **Deploy: sempre `npm run deploy`** (API da Vercel com o token, time Livus AI). Nunca Vercel CLI nem integração GitHub — dá o erro "GitHub account is not a Vercel team member".

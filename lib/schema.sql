@@ -35,3 +35,4 @@ create table if not exists strategies (
   summary text     -- Resumo da estratégia (até 400 caracteres)
 );
 alter table strategies add column if not exists summary text;
+alter table prospects add column if not exists title text; -- Cargo

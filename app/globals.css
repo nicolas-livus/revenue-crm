@@ -90,3 +90,15 @@ details[open]>summary::before{content:"–"}
 .msg-head{color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
 .msg-head b{color:var(--ink)}
 .contact>summary>span:first-child{flex:1}
+
+/* cadências · operacional */
+h2.section{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink);margin:32px 0 12px;display:flex;align-items:center;gap:10px}
+h2.section::after{content:"";flex:1;height:1px;background:var(--line)}
+.op-filters{align-items:flex-end;gap:16px}
+.op-filters label select{display:block;min-width:160px}
+.op-cards{display:grid;gap:8px}
+.op-card{background:var(--white);border:1px solid var(--line);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.op-who{display:grid;gap:2px}
+.op-who b{font-size:17px;font-weight:500}
+.op-touch{color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:10px}
+.op-actions{display:flex;gap:8px;align-items:center}

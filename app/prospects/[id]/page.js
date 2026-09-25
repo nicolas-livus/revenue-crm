@@ -22,7 +22,7 @@ export default async function Ficha({ params, searchParams }) {
 
     <div className="card"><h3>Identificação</h3>
       <div className="grid">
-        {f("name", "Nome", p.name)}{f("company", "Empresa", p.company)}{f("strategy", "Estratégia", p.strategy)}
+        {f("name", "Nome", p.name)}{f("company", "Empresa", p.company)}{f("title", "Cargo", p.title)}{f("strategy", "Estratégia", p.strategy)}
         {f("email", "E-mail", p.email)}{f("phone", "Telefone", p.phone)}{s("has_whatsapp", "Tem WhatsApp?", p.has_whatsapp, ["Sim", "Não"])}
         {f("linkedin", "LinkedIn", p.linkedin)}{f("owner", "Responsável", p.owner)}
         {f("created_on", "Data de criação", iso(p.created_on), "date")}
