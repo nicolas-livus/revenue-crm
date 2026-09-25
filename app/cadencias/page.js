@@ -1,18 +1,17 @@
 import { sql, loadProspects } from "@/lib/db";
-import { saveStrategy } from "@/lib/actions";
 import { filled } from "@/lib/metrics";
 export const dynamic = "force-dynamic";
 
 const METRICS = [["Prospects", () => true], ["Abordados", p => p.t[0].content], ["Reuniões", p => p.meeting_scheduled],
   ["Vendas", p => p.pipeline === "venda"], ["Desqualificados", p => p.stage === "Desqualificado" || p.pipeline === "desqualificada"]];
 
-export default async function Estrategias() {
+export default async function Cadencias() {
   const all = await loadProspects();
   const meta = Object.fromEntries((await sql`select * from strategies`).map(s => [s.code, s]));
   const codes = [...new Set([...all.map(p => p.strategy).filter(Boolean), ...Object.keys(meta)])].sort();
 
   return (<>
-    <h1>Estratégias e Cadências</h1>
+    <h1>Cadências</h1>
     <p className="mut">Abra uma estratégia para ver os contatos abordados; abra um contato para ler a cadência que ele recebeu.</p>
     {codes.map(code => {
       const ps = all.filter(p => p.strategy === code);
@@ -23,12 +22,7 @@ export default async function Estrategias() {
           <span className="strat-metrics">{METRICS.map(([l, fn]) => <span key={l}><b>{ps.filter(fn).length}</b>{l}</span>)}</span>
         </summary>
 
-        <form action={saveStrategy} className="row strat-meta"><input type="hidden" name="code" value={code} />
-          <label style={{ flex: 1 }}>Link do CSV da cadência<input name="csv_link" defaultValue={meta[code]?.csv_link || ""} placeholder="https://..." style={{ width: "100%" }} /></label>
-          <label style={{ flex: 2 }}>Observações<input name="notes" defaultValue={meta[code]?.notes || ""} style={{ width: "100%" }} /></label>
-          <button className="sec">Salvar</button>
-          {meta[code]?.csv_link && <a href={meta[code].csv_link} target="_blank">abrir CSV</a>}
-        </form>
+        {meta[code]?.summary && <p className="strat-summary">{meta[code].summary}</p>}
 
         <h3>Contatos abordados · {reached.length}</h3>
         {!reached.length && <p className="mut">Nenhum contato abordado ainda.</p>}

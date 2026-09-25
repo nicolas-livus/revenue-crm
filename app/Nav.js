@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { Wordmark } from "./Logo";
-const NAV = [["/", "Revenue BI"], ["/estrategias", "Estratégias e Cadências"], ["/recuperacao", "Banco de Recuperação"], ["/importar", "Importar / Exportar"]];
+const NAV = [["/", "Revenue BI"], ["/cadencias", "Cadências"], ["/recuperacao", "Banco de Recuperação"], ["/importar", "Importar / Exportar"]];
 export default function Nav() {
   const path = usePathname();
   if (path === "/login") return null;

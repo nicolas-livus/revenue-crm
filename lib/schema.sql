@@ -31,5 +31,7 @@ create table if not exists prospect_touches (
 create table if not exists strategies (
   code text primary key,
   csv_link text,   -- Link do CSV da cadência
-  notes text       -- Observações
+  notes text,      -- Observações (não exibido)
+  summary text     -- Resumo da estratégia (até 400 caracteres)
 );
+alter table strategies add column if not exists summary text;
