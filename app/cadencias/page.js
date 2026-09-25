@@ -3,6 +3,9 @@ import { filled } from "@/lib/metrics";
 import { markInvalidWhatsapp } from "@/lib/actions";
 import CopyButton from "./CopyButton";
 import AutoSubmit from "./AutoSubmit";
+// Nome curto da empresa: sem ®/™, sem parênteses e, se houver "A / B", o menor dos nomes
+const shortCompany = c => (c || "").replace(/[®™]/g, "").replace(/\s*\([^)]*\)/g, "").split(" / ")
+  .map(x => x.trim()).filter(Boolean).sort((a, b) => a.length - b.length)[0] || "";
 const variationOf = code => code?.match(/-([A-Z])-\d+$/)?.[1] || null;
 export const dynamic = "force-dynamic";
 
@@ -68,7 +71,7 @@ function Operacional({ all, codes, sp }) {
   // lista de contatos coerente com os filtros: um por contato, na ordem dos cards
   const seen = new Set();
   const contactList = cards.filter(({ p }) => !seen.has(p.id) && seen.add(p.id))
-    .map(({ p }) => `[${p.company || ""}] [${p.name || ""}][${(p.phone || "").replace(/\D/g, "")}]`).join("\n");
+    .map(({ p }) => `[${shortCompany(p.company)}] [${p.name || ""}][${(p.phone || "").replace(/\D/g, "")}]`).join("\n");
   const sel = (name, val, opts) => <select name={name} defaultValue={val}>{opts.map(o => <option key={o}>{o}</option>)}</select>;
   return (<section>
     <h2 className="section">Envios de WhatsApp</h2>
