@@ -14,7 +14,7 @@ export default async function Estrategias() {
       <thead><tr><th>Estratégia</th>{["Prospects", "Reuniões agendadas", "Vendas", "LinkedIn", "Telefones", "E-mails", "Desqualificados"].map(h => <th key={h} className="num">{h}</th>)}
         <th>Link do CSV da cadência</th><th>Observações</th><th></th></tr></thead>
       <tbody>{codes.map(c => (<tr key={c}>
-        <td><a href={`/?estrategia=${encodeURIComponent(c)}`}>{c}</a></td>
+        <td><a href={`/database?estrategia=${encodeURIComponent(c)}`}>{c}</a></td>
         {[() => true, p => p.meeting_scheduled, p => p.pipeline === "venda", p => p.linkedin, p => p.phone, p => p.email,
           p => p.stage === "Desqualificado" || p.pipeline === "desqualificada"].map((fn, i) => <td key={i} className="num">{count(c, fn)}</td>)}
         <td colSpan={3}><form action={saveStrategy} className="row"><input type="hidden" name="code" value={c} />

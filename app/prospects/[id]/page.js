@@ -14,7 +14,7 @@ export default async function Ficha({ params, searchParams }) {
 
   return (<form action={saveProspect}>
     <input type="hidden" name="id" value={p.id} />
-    <p><a href="/">← Database</a></p>
+    <p><a href="/">← Revenue BI</a></p>
     <div className="row" style={{ justifyContent: "space-between" }}>
       <h1>{p.name} <span className="mut">· {p.company} · {p.code}</span></h1>
       <div className="row">{salvo && <span className="ok">Salvo ✓</span>}<button>Salvar ficha</button></div>
