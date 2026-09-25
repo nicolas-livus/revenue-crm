@@ -67,3 +67,26 @@ tr:hover td{background:var(--paper)}
 .ok::before{content:"";width:6px;height:6px;background:var(--signal)}
 .err{color:var(--signal);font:500 12px var(--mono)}
 input[type=checkbox]{accent-color:var(--ink);width:auto;padding:0;margin:0 6px 0 0;vertical-align:-2px}
+
+/* estratégias: blocos ocultáveis */
+.mono{font-family:var(--mono);font-size:12px}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font:500 14px var(--mono);width:14px;color:var(--muted)}
+details[open]>summary::before{content:"–"}
+.strat{padding:0}.strat>summary{padding:18px 20px}
+.strat[open]>summary{border-bottom:1px solid var(--line)}
+.strat>*:not(summary){margin-left:20px;margin-right:20px}
+.strat>h3{margin-top:20px}.strat>details:last-child{margin-bottom:20px}
+.strat-code{font-size:22px;letter-spacing:-.01em;flex:1}
+.strat-metrics{display:flex;gap:24px;font:500 10px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.strat-metrics b{display:block;font:400 20px var(--sans);color:var(--ink);letter-spacing:0}
+.strat-meta{padding:16px 0;align-items:flex-end}
+.contact{border-top:1px solid var(--line)}
+.contact>summary{padding:10px 0}
+.contact[open]>summary{background:var(--paper)}
+.cadence{padding:4px 0 16px 30px;display:grid;gap:10px}
+.msg{border-left:2px solid var(--ink);padding:6px 12px;background:var(--mist)}
+.msg-head{color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.msg-head b{color:var(--ink)}
+.contact>summary>span:first-child{flex:1}
