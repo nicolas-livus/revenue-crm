@@ -11,4 +11,5 @@ Stack: Next.js (App Router, server actions) · Neon Postgres (driver HTTP `@neon
 - **Deploy: sempre `npm run deploy`** (API da Vercel com o token, time Livus AI). Nunca Vercel CLI nem integração GitHub — dá o erro "GitHub account is not a Vercel team member".
 - Enriquecimento: treg.to (`lib/treg.js`, header `X-Treg-Token`, endpoint roteado `treg.people.email.find`, teto US$0,30/chamada). Apollo continua via MCP; treg é o fallback mais barato.
 - Repositórios GitHub da Livus: sempre privados, na org https://github.com/Livus-AI
+- Visual: brand kit Livus 01 (Signal #E5341F só como ponto de ação, Ink #0A0A0A, Warm Paper #FEFBF2, Mist #F5F5F3, Muted #6B6B68; Archivo + JetBrains Mono para etiquetas/números; sem cantos arredondados). Símbolo em `app/Logo.js`.
 - Produção: https://revenue-crm-chi.vercel.app

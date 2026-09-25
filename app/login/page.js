@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { token } from "@/lib/auth";
+import { Wordmark } from "../Logo";
 
 async function login(fd) {
   "use server";
@@ -14,8 +15,9 @@ export default async function Login({ searchParams }) {
   const { e } = await searchParams;
   return (
     <form action={login} className="card login">
-      <h1>Livus · CRM</h1>
-      <input name="pw" type="password" placeholder="Senha" autoFocus />
+      <Wordmark size={40} />
+      <p className="claim">inteligência implantada na operação.</p>
+      <label>Senha<input name="pw" type="password" autoFocus style={{ width: "100%" }} /></label>
       {e && <p className="err">Senha incorreta</p>}
       <button>Entrar</button>
     </form>
